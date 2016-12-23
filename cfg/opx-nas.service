@@ -1,0 +1,16 @@
+[Unit]
+Description=Network abstraction service
+After=opx-cps.service
+Wants=opx-cps.service
+DefaultDependencies=no
+
+[Service]
+EnvironmentFile=/etc/opx/opx-environment
+ExecStart=/usr/bin/opx_nas_daemon
+
+# Resource Limitations
+LimitCORE=infinity
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

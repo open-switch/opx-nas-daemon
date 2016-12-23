@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This file is used to store default init configuration for nas objects
+    such as mirroring,sflow,vlan,lag,etc..
+
+    example
+
+<entry>
+    <mirror>
+        <source_interface>e00-1</source_interface>
+        <destination_interface>e00-2</destination_interface>
+        <direction>ingress</direction>
+    </mirror>
+    <sflow>
+        <interface>e00-3</interface>
+        <rate>50</rate>
+        <direction>ingress_egress</direction>
+    </sflow>
+</entry>
+
+-->
+<entry>
+</entry>
+
+
