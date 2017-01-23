@@ -1,7 +1,6 @@
 [Unit]
 Description=Network abstraction initiation
 After=opx-create-interface.service
-Wants=opx-create-interface.service
 DefaultDependencies=no
 
 [Service]
