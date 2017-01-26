@@ -14,7 +14,6 @@
 # permissions and limitations under the License.
 #
 
-export LD_LIBRARY_PATH=/usr/lib/opx:/usr/lib/x86_64-linux-gnu:/usr/lib:/lib
-export PYTHONPATH=/usr/lib/opx  
+. /etc/opx/opx-environment.sh
 
 /usr/bin/base_nas_default_init.py
