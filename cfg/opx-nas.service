@@ -1,11 +1,10 @@
 [Unit]
 Description=Network abstraction service
-After=opx-platform-init.service opx-cps.service
+After=opx-cps.service
 DefaultDependencies=no
 
 [Service]
 EnvironmentFile=/etc/opx/opx-environment
-ExecStartPre=/usr/bin/bcm_mod_init.sh
 ExecStart=/usr/bin/opx_nas_daemon
 
 # Resource Limitations
