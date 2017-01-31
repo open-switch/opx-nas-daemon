@@ -1,2 +1,2 @@
 #All exported headers
-nobase_include_HEADERS=opx/hald_init.h
+noinst_HEADERS=opx/hald_init.h
