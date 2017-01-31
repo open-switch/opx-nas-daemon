@@ -9,5 +9,5 @@ Vcs-Git: https://github.com/open-switch/opx-nas-daemon.git
 
 Package: opx-nas-daemon
 Architecture: any
-Depends: libopx-logging1,libopx-common1,libopx-base-model1,libopx-cps1,python-opx-cps,opx-cps,libopx-nas-common1,libopx-nas-ndi1,libopx-nas-linux1,libopx-nas-interface1,libopx-nas-acl1,libopx-nas-l2-1,libopx-nas-l3-1,libopx-nas-qos1,libopx-sai-common-utils1,libopx-sai-common1
+Depends: libopx-logging1,libopx-common1,libopx-base-model1,libopx-cps1,python-opx-cps,opx-cps,libopx-nas-common1,libopx-nas-ndi1,libopx-nas-linux1,libopx-nas-interface1,libopx-nas-acl1,libopx-nas-l2-1,libopx-nas-l3-1,libopx-nas-qos1
 Description: This package contains the Network Abstraction service.
