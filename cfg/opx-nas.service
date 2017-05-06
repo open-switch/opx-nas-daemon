@@ -5,6 +5,7 @@ DefaultDependencies=no
 
 [Service]
 EnvironmentFile=/etc/opx/opx-environment
+EnvironmentFile=-/etc/opx/opx-npu-settings
 ExecStart=/usr/bin/opx_nas_daemon
 
 # Resource Limitations
