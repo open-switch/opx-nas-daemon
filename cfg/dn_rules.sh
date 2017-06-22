@@ -18,3 +18,11 @@
 ebtables -I FORWARD -d BGA -j DROP
 ebtables -A FORWARD -d Multicast -j DROP
 ebtables -A FORWARD -p ARP -j DROP
+
+#Accept ARP request on eth0 and don't copy it to NFLOG
+ebtables -A OUTPUT -p ARP -o eth0 --arp-op Request -j ACCEPT
+#NFLOG to copy all ARP requests to netlink group 100
+ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 -j DROP
+# stop FCoE and FIP Packets from forwarding on all ports.
+ebtables -A FORWARD -p 0x8906 -j DROP
+ebtables -A FORWARD -p 0x8914 -j DROP

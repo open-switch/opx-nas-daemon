@@ -61,11 +61,11 @@ static t_hald_init_list hald_init_functions [] = {
 //base infrastructure
     { cps_init_functions, NULL,NULL },
 
-//NPU
-    { nas_ndi_init, NULL, NULL },
-
 //Switch
     { nas_switch_init, NULL, NULL },
+
+//NPU
+    { nas_ndi_init, NULL, NULL },
 
 // nas services
     { hal_interface_init, NULL, NULL },

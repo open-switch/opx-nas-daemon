@@ -1,3 +1,20 @@
+opx-nas-daemon (1.4.2) unstable; urgency=medium
+
+  [ Atanu Mandal ]
+  * Update: Default retransmit interval  and app_solicit options are set for IPv6 also.
+  * Update: Add rules for FCoE and FIP packets in the bridge
+  * Update: Increased the ARP/Nbr scale limit as per the UFT requirement
+  * Update: Dropping the VRRP MAC destined packets forwarding in the linux bridge.
+  * Update: Added ebtable rule to accept ARP request on eth0 and don't copy it to NFLOG
+  * Update: Updated IPv6 DAD settings
+  * Update: Miscellaneous performance improvements and optimizations
+  * Feature: Add systemd sigterm and sd_notify handling
+  * Feature: Added support for SIGTERM handling for service improvement in main.c
+  * Bugfix: Miscellaneous bug fixes
+  * Cleanup: Miscellaneous cleanup
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Tue, 20 Jun 2017 14:44:50 -0800
+
 opx-nas-daemon (1.0.2) unstable; urgency=medium
 
   [ Amy Buck ]

@@ -1,16 +1,16 @@
 [Unit]
 Description=Network abstraction service
-After=opx-cps.service
-DefaultDependencies=no
+After=opx-pas.service opx-cps.service
+Wants=opx-pas.service opx-cps.service
+OnFailure=service_onfailure@%n.service
 
 [Service]
+Type=notify
 EnvironmentFile=/etc/opx/opx-environment
 EnvironmentFile=-/etc/opx/opx-npu-settings
+ExecStartPre=/usr/bin/dn_rules.sh
 ExecStart=/usr/bin/opx_nas_daemon
-
-# Resource Limitations
-LimitCORE=infinity
-LimitNOFILE=16384
+TimeoutStartSec=180
 
 [Install]
 WantedBy=multi-user.target

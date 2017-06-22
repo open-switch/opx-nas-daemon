@@ -24,20 +24,43 @@
 #include "hald_init.h"
 
 #include <unistd.h>
-#include <stdlib.h>
 #include <string.h>
-#include <systemd/sd-daemon.h>
-
 #include <stdio.h>
+#include <signal.h>             /* signal() */
+#include <systemd/sd-daemon.h>  /* sd_notify() */
+#include <stdlib.h>             /* exit(), EXIT_SUCCESS */
+#include <stdbool.h>            /* bool, true, false */
+
+volatile static bool shutdwn = false;
+
+static void sigterm_hdlr(int signo)
+{
+    shutdwn = true;
+}
 
 int main(int argc, char **argv) {
+
+    // signal must install before service init
+    (void)signal(SIGTERM, sigterm_hdlr);
+
     if (hald_init()!=STD_ERR_OK) exit (1);
 
     sd_notify(0,"READY=1");
 
-    while (1) {
-        sleep(1);
+    while (!shutdwn) {
+        pause();
     }
-    return 0;
+
+    /* Let systemd know we got the shutdown request
+     * and that we're in the process of shutting down */
+    sd_notify(0, "STOPPING=1");
+
+    /************************************
+     *                                  *
+     * Shutdown clean up code goes here *
+     *                                  *
+     ************************************/
+
+    exit(EXIT_SUCCESS);
 }
 
