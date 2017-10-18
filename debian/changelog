@@ -1,3 +1,14 @@
+opx-nas-daemon (2.0.0) unstable; urgency=medium
+
+  [ Atanu Mandal ]
+  * Update: Modified rule to accept ARP request on eth0 untagged,tagged interface.
+  * Update: RP request should be sent from kernel for every ARP refresh trigger from Nbr-Mgr.
+  * Update: Add service dependency on PAS
+  * Bugfix: Miscellaneous bug fixes
+  * Cleanup: Miscellaneous cleanup
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Fri, 29 Sep 2017 14:44:50 -0800
+
 opx-nas-daemon (1.4.2) unstable; urgency=medium
 
   [ Atanu Mandal ]
