@@ -1,3 +1,12 @@
+opx-nas-daemon (2.1.0) unstable; urgency=medium
+
+  [ Garrick He ]
+  * Update: Modified ebtable rules to accept/forward IGMP packets
+  * Update: Accept only marked IGMP packets
+  * Update: Avoiding the VRRP MAC packets flooding in the kernel bridging level
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Wed, 13 Dec 2017 14:44:50 -0800
+
 opx-nas-daemon (2.0.0) unstable; urgency=medium
 
   [ Atanu Mandal ]
