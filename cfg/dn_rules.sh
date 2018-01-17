@@ -51,10 +51,12 @@ ebtables -A FORWARD -p ipv6 --ip6-proto ipv6-icmp --ip6-icmp-type neighbour-adve
 
 # Avoiding the VRRP MAC destined packets flooding in bridge level, redirecting the packets
 # to the next layer (routing) for further lookup.
-ebtables -t nat -N VRRP
-ebtables -t nat -A PREROUTING -d 00:00:5e:00:01:00/ff:ff:ff:ff:ff:00 -j VRRP
-ebtables -t nat -A VRRP -p IPv4 -j redirect --redirect-target ACCEPT
+ebtables -t nat -N IPV4VRRP
+ebtables -t nat -N IPV6VRRP
+ebtables -t nat -A PREROUTING -d 00:00:5e:00:01:00/ff:ff:ff:ff:ff:00 -j IPV4VRRP
+ebtables -t nat -A PREROUTING -d 00:00:5e:00:02:00/ff:ff:ff:ff:ff:00 -j IPV6VRRP
+ebtables -t nat -A IPV4VRRP -p IPv4 -j redirect --redirect-target ACCEPT
 
-ebtables -t nat -A VRRP -p IPv6 --ip6-protocol ipv6-icmp -j RETURN
-ebtables -t nat -A VRRP -p IPv6 -j redirect --redirect-target ACCEPT
+ebtables -t nat -A IPV6VRRP -p IPv6 --ip6-protocol ipv6-icmp -j RETURN
+ebtables -t nat -A IPV6VRRP -p IPv6 -j redirect --redirect-target ACCEPT
 

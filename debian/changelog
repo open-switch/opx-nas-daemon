@@ -1,3 +1,10 @@
+opx-nas-daemon (2.1.0+opx1) unstable; urgency=medium
+
+  [ Garrick He]
+  * Update: Add IPv6 VRRP support to dn_rules.sh script
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Wed, 15 Jan 2018 14:44:50 -0800
+
 opx-nas-daemon (2.1.0) unstable; urgency=medium
 
   [ Garrick He ]
