@@ -1,0 +1,122 @@
+#!/bin/bash
+# Copyright (c) 2018 Dell EMC
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+#
+# THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR
+# CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT
+# LIMITATION ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS
+# FOR A PARTICULAR PURPOSE, MERCHANTABLITY OR NON-INFRINGEMENT.
+#
+# See the Apache Version 2.0 License for specific language governing
+# permissions and limitations under the License.
+
+# Script to display and set switch profiles
+# For an explanation of switch profiles, see NAS documentation.
+#
+# Usage:
+#
+#   opx-switch-profile <switch-id>
+#     - Show current profile and profile on next boot
+#
+#   opx-switch-profile <switch-id> --list
+#     - Show all available profiles
+#
+#   opx-switch-profile <switch-id> <profile-name>
+#     - Set profile to take effect on next boot
+
+
+function usage
+{
+    # Show brief command usage
+
+    echo "$0 <switch-id> [ --list |  <profile-name> ]" >/dev/stderr
+    exit 1
+}
+
+function supported-profiles
+{
+    # Return list of supported profiles
+
+    declare -n ret=$2
+
+    ret=$(cps_get_oid.py -qua observed base-switch/switching-entities/switching-entity switch-id=$1 | grep 'supported-profiles' | sed 's/^.* = //')
+}
+
+function current-profile
+{
+    # Return current profile
+
+    declare -n ret=$2
+
+    ret=$(cps_get_oid.py -qua observed base-switch/switching-entities/switching-entity switch-id=$1 | grep 'switch-profile' | sed 's/^.* = //')
+}
+
+function next-profile
+{
+    # Return profile to take effect on next boot
+
+    declare -n ret=$2
+
+    ret=$(cps_get_oid.py -db -qua target base-switch/switching-entities/switching-entity switch-id=$1 | grep 'switch-profile' | sed 's/^.* = //')
+}
+
+function profile-set
+{
+    # Set profile to take effect on next boot
+
+    cps_set_oid.py -oper set -db -qua target -commit-event base-switch/switching-entities/switching-entity switch-id=$1 switch-profile=$2 >& /dev/null
+}
+
+
+if [ $# -lt 1 ]; then
+    usage
+
+elif [ $# -eq 1 ]; then
+    # Show profiles
+
+    echo -n "Current profile: "
+    current-profile $1 x
+    echo $x
+
+    echo -n "Profile on next boot: "
+    next-profile $1 x
+    echo $x
+
+elif [ $# -eq 2 ]; then
+    profiles=''
+    supported-profiles $1 profiles
+
+    if [ $2 = '--list' ]; then
+        # Show available profiles
+
+        echo $profiles
+
+    else       
+        # Set profile to take effect on next boot
+
+        x=$(echo $profiles | sed "s/^.*$2//")
+        s=$(expr substr "$x" 1 1)
+        if [ "$s" != '' -a "$s" != ',' ]; then
+            # Given profile is not in list of available profiles
+        
+            echo "Not a supported profile" >/dev/stderr
+            exit 1
+        fi
+
+        profile-set $1 $2
+
+        next-profile $1 x
+        if [ "$x" != $2 ]; then
+            # Retrieved profile on next boot does not match given profile, i.e. profile set failed
+
+            echo "Failed to set profile!" >/dev/stderr
+            exit 1
+        fi
+    fi
+else
+    usage
+
+fi

@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS=-I m4
 SUBDIRS = inc
 
-bin_SCRIPTS = cfg/*.py cfg/*.sh
+bin_SCRIPTS = cfg/*.py cfg/*.sh bin/*
 
 cfgdir = $(sysconfdir)/opx
 cfg_SCRIPTS = cfg/*.xml
@@ -22,3 +22,5 @@ opx_nas_daemon_LDADD= -lopx_logging -lopx_cps_api_common \
 opx_nas_daemon_CPPFLAGS= -I$(top_srcdir)/inc/opx -I$(includedir)/opx
 systemdconfdir=/lib/systemd/system
 systemdconf_DATA = cfg/*.service
+
+man1_MANS = man/man1/*
