@@ -13,7 +13,7 @@ bin_PROGRAMS=opx_nas_daemon
 
 COMMON_HARDEN_FLAGS=-fexceptions -fstack-protector-strong -fstack-protector-all -D_FORTIFY_SOURCE=2 -Wall -Wformat -Wformat-security -Werror
 C_HARDEN_FLAGS=-Wimplicit-function-declaration
-LD_HARDEN_FLAGS=-Wl,-z,defs -Wl,-z,now -Wl,-z,relo
+LD_HARDEN_FLAGS=-Wl,-z,defs -Wl,-z,now
 
 opx_nas_daemon_SOURCES=src/main.c src/hald_init.c
 

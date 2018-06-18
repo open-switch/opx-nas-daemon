@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# For consistency with framework
+exit 0
+

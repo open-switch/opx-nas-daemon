@@ -26,6 +26,7 @@
 #include "db_linux_event_register.h"
 #include "nas_qos_init.h"
 #include "hal_rt_extn.h"
+#include "nas_vrf_extn.h"
 
 #include "hal_interface.h"
 
@@ -70,6 +71,7 @@ static t_hald_init_list hald_init_functions [] = {
 // nas services
     { hal_interface_init, NULL, NULL },
     { nas_l2_init,  NULL, NULL },
+    { nas_vrf_init, NULL, NULL },
     { hal_rt_init, NULL, NULL },
     { hal_packet_io_init, NULL, NULL },
     { nas_acl_init, NULL, NULL },

@@ -1,3 +1,11 @@
+opx-nas-daemon (2.2.0) unstable; urgency=medium
+
+  * Feature: Routing VRF
+  * Bugfix: IGMP query received is not forwarded
+  * Bugfix: Avoid IP packets flooding in the Linux bridge
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Thu, 24 May 2018 14:44:50 -0800
+
 opx-nas-daemon (2.1.0+opx4) unstable; urgency=medium
 
   * Update: Add compiler/linker hardening flags
