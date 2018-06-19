@@ -6,4 +6,4 @@ This repository contains the network abstraction service (NAS) daemon. The NAS d
 
 See [Architecture](https://github.com/open-switch/opx-docs/wiki/Architecture) for more information on the NAS daemon service.
 
-(c) 2017 Dell EMC
+(c) 2018 Dell Inc. or its subsidiaries. All Rights Reserved.
