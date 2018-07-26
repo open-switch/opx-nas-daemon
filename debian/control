@@ -17,5 +17,4 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, libopx-logging1 
         libopx-cps1 (>= 3.6.2),python-opx-cps (>= 3.6.2),opx-cps (>= 3.6.2),libopx-nas-common1 (>= 6.1.0),
         libopx-nas-ndi1 (>= 3.26.0),libopx-nas-linux1 (>= 5.11.0),libopx-nas-interface1 (>= 5.10.1),
         libopx-nas-acl1 (>= 2.3.0),libopx-nas-l2-1 (>= 1.17.0),libopx-nas-l3-1 (>= 3.2.0),libopx-nas-qos1 (>= 2.2.0),
-        libopx-sai
 Description: This package contains the Network Abstraction service.

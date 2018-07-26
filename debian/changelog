@@ -1,3 +1,10 @@
+opx-nas-daemon (2.2.0+opx1) unstable; urgency=medium
+
+  * Bugfix: Service start-up dependencies and timing
+  * Bugfix: Remove unneeded package from debian/control file
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Tue, 24 Jul 2018 14:44:50 -0800
+
 opx-nas-daemon (2.2.0) unstable; urgency=medium
 
   * Feature: Routing VRF

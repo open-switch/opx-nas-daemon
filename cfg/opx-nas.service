@@ -1,7 +1,7 @@
 [Unit]
 Description=Network abstraction service
 After=opx-pas.service opx-cps.service
-Wants=opx-pas.service opx-cps.service
+Requires=opx-pas.service opx-cps.service
 OnFailure=service_onfailure@%n.service
 
 [Service]
