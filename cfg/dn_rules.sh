@@ -49,8 +49,6 @@ ebtables -t nat -A POSTROUTING -d Multicast --mark 0x1 -j DROP
 
 #Accept ARP request on eth0 (untagged/tagged interfaces) and don't copy it to NFLOG
 ebtables -A OUTPUT -p ARP -o eth0+ --arp-op Request -j ACCEPT
-#NFLOG to copy all ARP requests to netlink group 100
-ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 -j DROP
 
 # Avoiding the VRRP MAC destined packets flooding in bridge level, redirecting the packets
 # to the next layer (routing) for further lookup.
