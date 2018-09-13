@@ -1,6 +1,12 @@
+opx-nas-daemon (2.2.0+opx3) unstable; urgency=medium
+
+  * Update: Increase service start-up time-out
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Thu, 13 Sep 2018  11:36:00 -0800
+
 opx-nas-daemon (2.2.0+opx2) unstable; urgency=medium
 
-  * Bugfix: Modify dn_rules.sh to prevent ARP requests going 
+  * Bugfix: Modify dn_rules.sh to prevent ARP requests going
             into NFLOG filter to solve ping issues
 
  -- Dell EMC <ops-dev@lists.openswitch.net>  Fri, 31 Aug 2018 14:44:50 -0800

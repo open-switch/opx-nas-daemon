@@ -8,7 +8,7 @@ Type=oneshot
 RemainAfterExit=yes
 EnvironmentFile=/etc/opx/opx-environment
 ExecStart=/usr/bin/python -u /usr/bin/base_nas_default_init.py
-TimeoutStartSec=90
+TimeoutStartSec=180
 
 [Install]
 WantedBy=multi-user.target
