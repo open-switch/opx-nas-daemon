@@ -34,6 +34,8 @@ ebtables -A FORWARD -p ipv6 --ip6-proto ipv6-icmp --ip6-icmp-type neighbour-adve
 #egress after POSTROUTING.
 ebtables -A FORWARD -d Multicast -j mark --mark-set 0x1 --mark-target ACCEPT
 ebtables -A FORWARD -d Broadcast -j mark --mark-set 0x2 --mark-target ACCEPT
+# Drop all packets forwarding in the linux bridge,
+# add a rule to accept any packets above this line.
 ebtables -A FORWARD -p IPv4 -j DROP
 ebtables -A FORWARD -p IPv6 -j DROP
 
@@ -61,4 +63,5 @@ ebtables -t nat -A IPV4VRRP -p IPv4 -j redirect --redirect-target ACCEPT
 ebtables -t nat -A IPV6VRRP -p IPv6 --ip6-protocol ipv6-icmp -j RETURN
 ebtables -t nat -A IPV6VRRP -p IPv6 -j redirect --redirect-target ACCEPT
 
-
+#NFLOG to copy all ARP requests to netlink group 100
+ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 -j DROP
