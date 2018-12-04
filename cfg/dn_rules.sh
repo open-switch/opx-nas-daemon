@@ -64,4 +64,4 @@ ebtables -t nat -A IPV6VRRP -p IPv6 --ip6-protocol ipv6-icmp -j RETURN
 ebtables -t nat -A IPV6VRRP -p IPv6 -j redirect --redirect-target ACCEPT
 
 #NFLOG to copy all ARP requests to netlink group 100
-ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 -j DROP
+ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 --nflog-range 28 -j DROP
