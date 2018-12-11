@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2018 Dell EMC
+# Copyright (c) 2018 Dell Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -94,14 +94,14 @@ elif [ $# -eq 2 ]; then
 
         echo $profiles
 
-    else       
+    else
         # Set profile to take effect on next boot
 
         x=$(echo $profiles | sed "s/^.*$2//")
         s=$(expr substr "$x" 1 1)
         if [ "$s" != '' -a "$s" != ',' ]; then
             # Given profile is not in list of available profiles
-        
+
             echo "Not a supported profile" >/dev/stderr
             exit 1
         fi
