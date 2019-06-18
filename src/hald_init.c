@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Dell Inc.
+ * Copyright (c) 2019 Dell Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License. You may obtain
@@ -33,6 +33,7 @@
 #include "cps_api_events.h"
 #include "db_api_linux_init.h"
 #include "nas_l2_init.h"
+#include "nas_mc_l3_main.h"
 #include "nas_acl_init.h"
 #include "nas_switch.h"
 #include <stdio.h>
@@ -71,6 +72,7 @@ static t_hald_init_list hald_init_functions [] = {
 // nas services
     { hal_interface_init, NULL, NULL },
     { nas_l2_init,  NULL, NULL },
+    { nas_mc_l3_init,  NULL, NULL },
     { nas_vrf_init, NULL, NULL },
     { hal_rt_init, NULL, NULL },
     { hal_packet_io_init, NULL, NULL },

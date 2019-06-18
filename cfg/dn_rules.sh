@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2018 Dell Inc.
+# Copyright (c) 2019 Dell Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -15,6 +15,7 @@
 # permissions and limitations under the License.
 #
 #*******************FILTER table FORWARD chain rules****************
+
 ebtables -I FORWARD -d BGA -j DROP
 ebtables -A FORWARD -p ARP -j DROP
 # stop FCoE and FIP Packets from forwarding on all ports.
@@ -32,6 +33,12 @@ ebtables -A FORWARD -p ipv6 --ip6-proto ipv6-icmp --ip6-icmp-type neighbour-adve
 #so there is no rule which can accept both tagged and untagged IGMP/MLD packets.
 #So here IGMP/MLD rule is not added to accept it. The rule is added below in
 #egress after POSTROUTING.
+#In some cases where IGMP/MLD packet need to be give to next layer for processing
+#but need not be forwarded in kernel (when Snooping application is running).
+#Those packet are identified and marked with 0x64 dynamically based on snooping status
+#in BROUTE chain and will be dropped here in FORWARD chain, which allows the packet to
+#go to INPUT chain and upper layer. if it get dropped in BROUTE, it will not reach next layer
+ebtables -A FORWARD --mark 0x64  -j DROP
 ebtables -A FORWARD -d Multicast -j mark --mark-set 0x1 --mark-target ACCEPT
 ebtables -A FORWARD -d Broadcast -j mark --mark-set 0x2 --mark-target ACCEPT
 # Drop all packets forwarding in the linux bridge,
@@ -64,4 +71,9 @@ ebtables -t nat -A IPV6VRRP -p IPv6 --ip6-protocol ipv6-icmp -j RETURN
 ebtables -t nat -A IPV6VRRP -p IPv6 -j redirect --redirect-target ACCEPT
 
 #NFLOG to copy all ARP requests to netlink group 100
-ebtables -A OUTPUT -p ARP --arp-op Request --nflog-group 100 --nflog-range 28 -j DROP
+ebtables -A OUTPUT -d Broadcast -p ARP --arp-op Request --nflog-group 100 --nflog-range 28 -j DROP
+
+#Accept NS request on eth0 (untagged/tagged interfaces) and don't copy it to NFLOG. This rule is applicable for starlynx platform only
+ebtables -A OUTPUT -p IPv6 --ip6-proto ipv6-icmp  -o eth0+ --ip6-icmp-type 135 -j ACCEPT
+#NFLOG to copy all NS requests to netlink group 100
+ebtables -A OUTPUT -d Multicast -p IPv6 --ip6-proto ipv6-icmp --ip6-icmp-type 135  --nflog-group 100 -j DROP

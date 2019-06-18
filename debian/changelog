@@ -1,3 +1,11 @@
+opx-nas-daemon (2.5.0) unstable; urgency=medium
+
+  * Bugfix: s5212 and s5224 scaling improvements
+  * Update: Increased the ARP/Nbr scale limit
+  * Update: Copyright year 
+
+ -- Dell EMC <ops-dev@lists.openswitch.net>  Wed, 5 Jun 2019  11:36:00 -0800
+
 opx-nas-daemon (2.2.0+opx8) unstable; urgency=medium
 
   * Update: README copyright placement
